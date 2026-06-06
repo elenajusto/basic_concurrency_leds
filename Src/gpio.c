@@ -9,7 +9,7 @@
 
 void led_init(void) {
 	/*Enable clock access to GPIOA*/
-	RCC->AHB1ENR |= GPIOAEN;
+	RCC->IOPENR |= GPIOAEN;
 
 	/*Set PA5 mode to output mode*/
 	GPIOA->MODER |=(1U<<10);
@@ -29,7 +29,7 @@ void led_off(void) {
 
 void button_init(void) {
 	/*Enable clock access to PORTC*/
-	RCC->AHB1ENR |=GPIOCEN;
+	RCC->IOPENR |=GPIOCEN;
 
 	/*Set PC13 as an input pin*/
 	GPIOC->MODER &=~(1U<<26);
