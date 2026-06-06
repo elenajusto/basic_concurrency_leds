@@ -1,4 +1,4 @@
-Src/main.o: ../Src/main.c ../Inc/gpio.h \
+Src/gpio.o: ../Src/gpio.c ../Inc/gpio.h \
  ../CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h \
  ../CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h \
  ../CMSIS/Include/core_cm0plus.h ../CMSIS/Include/cmsis_version.h \
