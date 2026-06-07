@@ -15,5 +15,6 @@ void init_pin(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode);
 
 void pin_high(GPIO_TypeDef *port, uint8_t pin);
 void pin_low(GPIO_TypeDef *port, uint8_t pin);
+bool pin_read(GPIO_TypeDef *port, uint8_t pin);
 
 #endif /* GPIO_H_ */

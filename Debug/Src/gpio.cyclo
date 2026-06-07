@@ -1,3 +1,4 @@
 ../Src/gpio.c:3:6:init_pin	1
 ../Src/gpio.c:7:6:pin_high	1
 ../Src/gpio.c:11:6:pin_low	1
+../Src/gpio.c:15:6:pin_read	1

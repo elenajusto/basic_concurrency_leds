@@ -22,22 +22,19 @@ int main(void) {
 	
 	/* Main Program Loop */
 	while(1) {
-		control_rgb_Led(1,0,0);
- 		delay(200);
-		control_rgb_Led(0,0,0);
-		delay(200);
+		if (pin_read(GPIOA, BUTTON_ONE_PIN)) {
+			control_rgb_Led(1, 0, 0);
+		}
+		else {
+			control_rgb_Led(0, 0, 0);
+		}
 
-		control_rgb_Led(0,1,0);
-		delay(200);
-		control_rgb_Led(0,0,0);
-		delay(200);
-
-		control_rgb_Led(0,0,1);
-		delay(200);
-		control_rgb_Led(0,0,0);
-		delay(200);
-		
-
+		if (pin_read(GPIOA, BUTTON_TWO_PIN)) {
+			control_rgb_Led(0, 1, 0);
+		}
+		else {
+			control_rgb_Led(0, 0, 0);
+		}
 	}
 }
 
