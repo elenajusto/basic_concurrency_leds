@@ -19,7 +19,6 @@ typedef enum {
 } gpio_mode_t;
 
 void init_pin(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode);
-void init_port_b(void);
 
 void pin_high(GPIO_TypeDef *port, uint8_t pin);
 void pin_low(GPIO_TypeDef *port, uint8_t pin);
