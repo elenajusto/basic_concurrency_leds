@@ -15,7 +15,7 @@ int main(void) {
 	/* Main Program Loop */
 	while(1) {
 		pin_high(GPIOB, 4);
-		delay_ms(200);
+ 		delay_ms(200);
 		pin_low(GPIOB, 4);
 
 		pin_high(GPIOB, 3);
@@ -39,4 +39,6 @@ void init_port_b(void) {
 void init_port_a(void) {
 	RCC->IOPENR |= RCC_IOPENR_GPIOAEN ;
 	init_pin(GPIOA, 10, GPIO_MODE_OUTPUT);  // D2
+	init_pin(GPIOA, 9, GPIO_MODE_INPUT);    // D8
+	init_pin(GPIOA, 7, GPIO_MODE_INPUT);    // D11
 }
