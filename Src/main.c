@@ -14,10 +14,20 @@
 #define RGB_DELAY_SLOW 	4000
 #define RGB_DELAY_FAST	1000
 
+/* INit global variables */
+uint8_t g_flash_led = 0;
+uint32_t g_w_delay = W_DELAY_SLOW;
+uint32_t g_rgb_delay = RGB_DELAY_SLOW;
+
 /* Prototypes */
 void init_port_b(void);
 void init_port_a(void);
+
 void control_rgb_led(int red, int green, int blue);
+
+void task_read_buttons(void);
+void task_flash(void);
+void task_rgb(void);
 
 /* Main Program Entry */
 int main(void) {
@@ -25,36 +35,11 @@ int main(void) {
 	init_port_b();
 	init_port_a();
 	
-	/* Init delay values */
-	uint32_t w_delay = W_DELAY_SLOW;
-	uint32_t rgb_delay = RGB_DELAY_SLOW;
-
 	/* Main Program Loop */
 	while(1) {
-
-		if (pin_read(GPIOA, BUTTON_ONE_PIN)) { // flash white
-			control_rgb_led(1, 1, 1);
-			delay(w_delay);
-			control_rgb_led(0, 0, 0);
-			delay(w_delay);
-		}
-		else {									// sequence RGB
-			control_rgb_led(1, 0, 0);
-			delay(rgb_delay);
-			control_rgb_led(0, 1, 0);
-			delay(rgb_delay);
-			control_rgb_led(0, 0, 1);
-			delay(rgb_delay);
-		}
-
-		if (pin_read(GPIOA, BUTTON_TWO_PIN)) {
-			w_delay = W_DELAY_FAST;
-			rgb_delay = RGB_DELAY_FAST;
-		} else {
-			w_delay = W_DELAY_SLOW;
-			rgb_delay = RGB_DELAY_SLOW;
-		}
-
+		task_read_buttons();
+		task_flash();
+		task_rgb();
 	}
 }
 
@@ -89,5 +74,40 @@ void control_rgb_led(int red_on, int green_on, int blue_on) {
 		pin_high(GPIOA, BLUE_LED_PIN);
 	} else {
 		pin_low(GPIOA, BLUE_LED_PIN);
+	}
+}
+
+void task_read_buttons(void) {
+	if (pin_read(GPIOA, BUTTON_ONE_PIN)) {
+		g_flash_led = 1;
+	} else {
+		g_flash_led = 0;
+	}
+	if (pin_read(GPIOA, BUTTON_TWO_PIN)) {
+		g_w_delay = W_DELAY_FAST;
+		g_rgb_delay = RGB_DELAY_FAST;
+	} else {
+		g_w_delay = W_DELAY_SLOW;
+		g_rgb_delay = RGB_DELAY_SLOW;
+	}
+}
+
+void task_flash(void) {
+	if (g_flash_led == 1) {			// only run task when in flash mode
+		control_rgb_led(1, 1, 1);
+		delay(g_w_delay);
+		control_rgb_led(0, 0, 0);
+		delay(g_w_delay);
+	}
+}
+
+void task_rgb(void) {				// only run task when NOT flash mode
+	if (g_flash_led == 0) {
+		control_rgb_led(1, 0, 0);
+		delay(g_rgb_delay);
+		control_rgb_led(0, 1, 0);
+		delay(g_rgb_delay);
+		control_rgb_led(0, 0, 1);
+		delay(g_rgb_delay);
 	}
 }
