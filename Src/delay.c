@@ -1,7 +1,9 @@
 #include "delay.h"
 
-void delay_ms(uint32_t ms) {
-    for (uint32_t i = 0; i < ms; i++) {
-        for (volatile uint32_t j = 0; j < 4000; j++);
+void delay(unsigned int time_del) {
+    volatile int n;
+    while(time_del--) {
+        n = 1000;
+        while(n--);
     }
 }

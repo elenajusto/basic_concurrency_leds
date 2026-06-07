@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void delay_ms(uint32_t ms);
+void delay(unsigned int time_del);
 
 #endif /* DELAY_H_ */

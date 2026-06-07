@@ -23,19 +23,19 @@ int main(void) {
 	/* Main Program Loop */
 	while(1) {
 		control_rgb_Led(1,0,0);
- 		delay_ms(200);
+ 		delay(200);
 		control_rgb_Led(0,0,0);
-		delay_ms(200);
+		delay(200);
 
 		control_rgb_Led(0,1,0);
-		delay_ms(200);
+		delay(200);
 		control_rgb_Led(0,0,0);
-		delay_ms(200);
+		delay(200);
 
 		control_rgb_Led(0,0,1);
-		delay_ms(200);
+		delay(200);
 		control_rgb_Led(0,0,0);
-		delay_ms(200);
+		delay(200);
 		
 
 	}
