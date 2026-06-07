@@ -1,3 +1,4 @@
-../Src/main.c:10:5:main	8	static
-../Src/main.c:33:6:init_port_b	8	static
-../Src/main.c:39:6:init_port_a	8	static
+../Src/main.c:17:5:main	8	static
+../Src/main.c:40:6:init_port_b	8	static
+../Src/main.c:46:6:init_port_a	8	static
+../Src/main.c:53:6:control_rgb_Led	24	static

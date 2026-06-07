@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000028  00000000  00000000  00001370  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000067b  00000000  00000000  00001398  2**0
+ 12 .debug_info   000006bb  00000000  00000000  00001398  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000002d6  00000000  00000000  00001a13  2**0
+ 13 .debug_abbrev 00000315  00000000  00000000  00001a53  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000000a8  00000000  00000000  00001cf0  2**3
+ 14 .debug_aranges 000000b0  00000000  00000000  00001d68  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 0000006a  00000000  00000000  00001d98  2**0
+ 15 .debug_rnglists 00000070  00000000  00000000  00001e18  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0000e0c5  00000000  00000000  00001e02  2**0
+ 16 .debug_macro  0000e0e3  00000000  00000000  00001e88  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00000f29  00000000  00000000  0000fec7  2**0
+ 17 .debug_line   00000f3d  00000000  00000000  0000ff6b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0004f6db  00000000  00000000  00010df0  2**0
+ 18 .debug_str    0004f746  00000000  00000000  00010ea8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000604cb  2**0
+ 19 .comment      00000043  00000000  00000000  000605ee  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000130  00000000  00000000  00060510  2**2
+ 20 .debug_frame  00000150  00000000  00000000  00060634  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000064  00000000  00000000  00060640  2**0
+ 21 .debug_line_str 00000064  00000000  00000000  00060784  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -231,7 +231,7 @@ int main(void) {
 	
 	/* Main Program Loop */
 	while(1) {
-		pin_high(GPIOB, 4);
+		pin_high(GPIOB, RED_LED_PIN);
  80001dc:	4b15      	ldr	r3, [pc, #84]	@ (8000234 <main+0x64>)
  80001de:	2104      	movs	r1, #4
  80001e0:	0018      	movs	r0, r3
@@ -239,13 +239,13 @@ int main(void) {
  		delay_ms(200);
  80001e6:	20c8      	movs	r0, #200	@ 0xc8
  80001e8:	f7ff ff8c 	bl	8000104 <delay_ms>
-		pin_low(GPIOB, 4);
+		pin_low(GPIOB, RED_LED_PIN);
  80001ec:	4b11      	ldr	r3, [pc, #68]	@ (8000234 <main+0x64>)
  80001ee:	2104      	movs	r1, #4
  80001f0:	0018      	movs	r0, r3
  80001f2:	f7ff ffda 	bl	80001aa <pin_low>
 
-		pin_high(GPIOB, 3);
+		pin_high(GPIOB, GREEN_LED_PIN);
  80001f6:	4b0f      	ldr	r3, [pc, #60]	@ (8000234 <main+0x64>)
  80001f8:	2103      	movs	r1, #3
  80001fa:	0018      	movs	r0, r3
@@ -253,13 +253,13 @@ int main(void) {
 		delay_ms(200);
  8000200:	20c8      	movs	r0, #200	@ 0xc8
  8000202:	f7ff ff7f 	bl	8000104 <delay_ms>
-		pin_low(GPIOB, 3);
+		pin_low(GPIOB, GREEN_LED_PIN);
  8000206:	4b0b      	ldr	r3, [pc, #44]	@ (8000234 <main+0x64>)
  8000208:	2103      	movs	r1, #3
  800020a:	0018      	movs	r0, r3
  800020c:	f7ff ffcd 	bl	80001aa <pin_low>
 
-		pin_high(GPIOA, 10);
+		pin_high(GPIOA, BLUE_LED_PIN);
  8000210:	23a0      	movs	r3, #160	@ 0xa0
  8000212:	05db      	lsls	r3, r3, #23
  8000214:	210a      	movs	r1, #10
@@ -268,13 +268,13 @@ int main(void) {
 		delay_ms(200);
  800021c:	20c8      	movs	r0, #200	@ 0xc8
  800021e:	f7ff ff71 	bl	8000104 <delay_ms>
-		pin_low(GPIOA, 10);
+		pin_low(GPIOA, BLUE_LED_PIN);
  8000222:	23a0      	movs	r3, #160	@ 0xa0
  8000224:	05db      	lsls	r3, r3, #23
  8000226:	210a      	movs	r1, #10
  8000228:	0018      	movs	r0, r3
  800022a:	f7ff ffbe 	bl	80001aa <pin_low>
-		pin_high(GPIOB, 4);
+		pin_high(GPIOB, RED_LED_PIN);
  800022e:	46c0      	nop			@ (mov r8, r8)
  8000230:	e7d4      	b.n	80001dc <main+0xc>
  8000232:	46c0      	nop			@ (mov r8, r8)
@@ -296,13 +296,13 @@ void init_port_b(void) {
  8000242:	2102      	movs	r1, #2
  8000244:	430a      	orrs	r2, r1
  8000246:	635a      	str	r2, [r3, #52]	@ 0x34
-	init_pin(GPIOB, 4, GPIO_MODE_OUTPUT);  // D5
+	init_pin(GPIOB, RED_LED_PIN, GPIO_MODE_OUTPUT);  	// D5 
  8000248:	4b08      	ldr	r3, [pc, #32]	@ (800026c <init_port_b+0x34>)
  800024a:	2201      	movs	r2, #1
  800024c:	2104      	movs	r1, #4
  800024e:	0018      	movs	r0, r3
  8000250:	f7ff ff76 	bl	8000140 <init_pin>
-	init_pin(GPIOB, 3, GPIO_MODE_OUTPUT);  // D3
+	init_pin(GPIOB, GREEN_LED_PIN, GPIO_MODE_OUTPUT);	// D3 
  8000254:	4b05      	ldr	r3, [pc, #20]	@ (800026c <init_port_b+0x34>)
  8000256:	2201      	movs	r2, #1
  8000258:	2103      	movs	r1, #3
@@ -328,21 +328,21 @@ void init_port_a(void) {
  800027a:	2101      	movs	r1, #1
  800027c:	430a      	orrs	r2, r1
  800027e:	635a      	str	r2, [r3, #52]	@ 0x34
-	init_pin(GPIOA, 10, GPIO_MODE_OUTPUT);  // D2
+	init_pin(GPIOA, BLUE_LED_PIN, GPIO_MODE_OUTPUT);    // D2 
  8000280:	23a0      	movs	r3, #160	@ 0xa0
  8000282:	05db      	lsls	r3, r3, #23
  8000284:	2201      	movs	r2, #1
  8000286:	210a      	movs	r1, #10
  8000288:	0018      	movs	r0, r3
  800028a:	f7ff ff59 	bl	8000140 <init_pin>
-	init_pin(GPIOA, 9, GPIO_MODE_INPUT);    // D8
+	init_pin(GPIOA, BUTTON_ONE_PIN, GPIO_MODE_INPUT);   // D8
  800028e:	23a0      	movs	r3, #160	@ 0xa0
  8000290:	05db      	lsls	r3, r3, #23
  8000292:	2200      	movs	r2, #0
  8000294:	2109      	movs	r1, #9
  8000296:	0018      	movs	r0, r3
  8000298:	f7ff ff52 	bl	8000140 <init_pin>
-	init_pin(GPIOA, 7, GPIO_MODE_INPUT);    // D11
+	init_pin(GPIOA, BUTTON_TWO_PIN, GPIO_MODE_INPUT);   // D11
  800029c:	23a0      	movs	r3, #160	@ 0xa0
  800029e:	05db      	lsls	r3, r3, #23
  80002a0:	2200      	movs	r2, #0
