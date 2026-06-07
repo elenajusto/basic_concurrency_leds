@@ -1,9 +1,4 @@
-../Src/gpio.c:10:6:led_init	1
-../Src/gpio.c:19:6:led_on	1
-../Src/gpio.c:24:6:led_off	1
-../Src/gpio.c:29:6:button_init	1
-../Src/gpio.c:38:6:get_btn_state	2
-../Src/gpio.c:51:6:init_pin	1
-../Src/gpio.c:55:6:pin_high	1
-../Src/gpio.c:59:6:pin_low	1
-../Src/gpio.c:63:6:init_port_b	1
+../Src/gpio.c:5:6:init_pin	1
+../Src/gpio.c:9:6:pin_high	1
+../Src/gpio.c:13:6:pin_low	1
+../Src/gpio.c:17:6:init_port_b	1
