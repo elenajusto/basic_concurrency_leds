@@ -12,6 +12,7 @@
 /* Prototypes */
 void init_port_b(void);
 void init_port_a(void);
+void control_rgb_Led(int red, int green, int blue);
 
 /* Main Program Entry */
 int main(void) {
@@ -21,17 +22,21 @@ int main(void) {
 	
 	/* Main Program Loop */
 	while(1) {
-		pin_high(GPIOB, RED_LED_PIN);
+		control_rgb_Led(1,0,0);
  		delay_ms(200);
-		pin_low(GPIOB, RED_LED_PIN);
-
-		pin_high(GPIOB, GREEN_LED_PIN);
+		control_rgb_Led(0,0,0);
 		delay_ms(200);
-		pin_low(GPIOB, GREEN_LED_PIN);
 
-		pin_high(GPIOA, BLUE_LED_PIN);
+		control_rgb_Led(0,1,0);
 		delay_ms(200);
-		pin_low(GPIOA, BLUE_LED_PIN);
+		control_rgb_Led(0,0,0);
+		delay_ms(200);
+
+		control_rgb_Led(0,0,1);
+		delay_ms(200);
+		control_rgb_Led(0,0,0);
+		delay_ms(200);
+		
 
 	}
 }
@@ -50,5 +55,22 @@ void init_port_a(void) {
 	init_pin(GPIOA, BUTTON_TWO_PIN, GPIO_MODE_INPUT);   // D11
 }
 
-void control_rgb_Led(int red, int green, int blue) {
+void control_rgb_Led(int red_on, int green_on, int blue_on) {
+	if (red_on) {
+		pin_high(GPIOB, RED_LED_PIN);
+	} else {
+		pin_low(GPIOB, RED_LED_PIN);
+	}
+
+	if (green_on) {
+		pin_high(GPIOB, GREEN_LED_PIN);
+	} else {
+		pin_low(GPIOB, GREEN_LED_PIN);
+	}
+
+	if (blue_on) {
+		pin_high(GPIOA, BLUE_LED_PIN);
+	} else {
+		pin_low(GPIOA, BLUE_LED_PIN);
+	}
 }
