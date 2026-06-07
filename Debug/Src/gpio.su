@@ -1,5 +1,9 @@
 ../Src/gpio.c:10:6:led_init	8	static
-../Src/gpio.c:20:6:led_on	8	static
-../Src/gpio.c:25:6:led_off	8	static
-../Src/gpio.c:30:6:button_init	8	static
-../Src/gpio.c:39:6:get_btn_state	8	static
+../Src/gpio.c:19:6:led_on	8	static
+../Src/gpio.c:24:6:led_off	8	static
+../Src/gpio.c:29:6:button_init	8	static
+../Src/gpio.c:38:6:get_btn_state	8	static
+../Src/gpio.c:51:6:init_pin	16	static
+../Src/gpio.c:55:6:pin_high	16	static
+../Src/gpio.c:59:6:pin_low	16	static
+../Src/gpio.c:63:6:init_port_b	8	static
