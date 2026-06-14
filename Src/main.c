@@ -1,6 +1,9 @@
+#include "stm32g071xx.h"
 #include "stm32g0xx.h"
 #include "gpio.h"
 #include "delay.h"
+#include "gpio_exti.h"
+#include <stdio.h>
 
 /* Defines */
 #define RED_LED_PIN		4
@@ -15,9 +18,9 @@
 #define RGB_DELAY_FAST	1000
 
 /* INit global variables */
-uint8_t g_flash_led = 0;
-uint32_t g_w_delay = W_DELAY_SLOW;
-uint32_t g_rgb_delay = RGB_DELAY_SLOW;
+volatile uint8_t g_flash_led = 0;
+volatile uint32_t g_w_delay = W_DELAY_SLOW;
+volatile uint32_t g_rgb_delay = RGB_DELAY_SLOW;
 
 /* Prototypes */
 void init_port_b(void);
@@ -34,10 +37,13 @@ int main(void) {
 	/* Init gpio ports */
 	init_port_b();
 	init_port_a();
+
+	/* Init interrupts */
+	button_one_exti_init(); 
+	button_two_exti_init();
 	
 	/* Main Program Loop */
 	while(1) {
-		task_read_buttons();
 		task_flash();
 		task_rgb();
 	}
@@ -109,5 +115,17 @@ void task_rgb(void) {				// only run task when NOT flash mode
 		delay(g_rgb_delay);
 		control_rgb_led(0, 0, 1);
 		delay(g_rgb_delay);
+	}
+}
+
+void EXTI4_15_IRQHandler(void) {
+	if ((EXTI->FPR1 & EXTI_FPR1_FPIF9) != 0) {
+		EXTI->FPR1 |= EXTI_FPR1_FPIF9;
+		control_rgb_led(1,0,1);
+	}
+
+	if ((EXTI->FPR1 & EXTI_FPR1_FPIF7) != 0) {
+		EXTI->FPR1 |= EXTI_FPR1_FPIF7;
+		control_rgb_led(0,1,1);
 	}
 }

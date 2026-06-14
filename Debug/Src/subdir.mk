@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Src/delay.c \
 ../Src/gpio.c \
+../Src/gpio_exti.c \
 ../Src/main.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c 
@@ -14,6 +15,7 @@ C_SRCS += \
 OBJS += \
 ./Src/delay.o \
 ./Src/gpio.o \
+./Src/gpio_exti.o \
 ./Src/main.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o 
@@ -21,6 +23,7 @@ OBJS += \
 C_DEPS += \
 ./Src/delay.d \
 ./Src/gpio.d \
+./Src/gpio_exti.d \
 ./Src/main.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d 
@@ -33,7 +36,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/delay.cyclo ./Src/delay.d ./Src/delay.o ./Src/delay.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/delay.cyclo ./Src/delay.d ./Src/delay.o ./Src/delay.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/gpio_exti.cyclo ./Src/gpio_exti.d ./Src/gpio_exti.o ./Src/gpio_exti.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
 
 .PHONY: clean-Src
 

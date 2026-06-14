@@ -1,0 +1,3 @@
+../CMSIS/Include/core_cm0plus.h:741:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Src/gpio_exti.c:7:6:button_one_exti_init	8	static,ignoring_inline_asm
+../Src/gpio_exti.c:37:6:button_two_exti_init	8	static,ignoring_inline_asm
