@@ -10,7 +10,8 @@ C_SRCS += \
 ../Src/gpio_exti.c \
 ../Src/main.c \
 ../Src/syscalls.c \
-../Src/sysmem.c 
+../Src/sysmem.c \
+../Src/tim.c 
 
 OBJS += \
 ./Src/delay.o \
@@ -18,7 +19,8 @@ OBJS += \
 ./Src/gpio_exti.o \
 ./Src/main.o \
 ./Src/syscalls.o \
-./Src/sysmem.o 
+./Src/sysmem.o \
+./Src/tim.o 
 
 C_DEPS += \
 ./Src/delay.d \
@@ -26,7 +28,8 @@ C_DEPS += \
 ./Src/gpio_exti.d \
 ./Src/main.d \
 ./Src/syscalls.d \
-./Src/sysmem.d 
+./Src/sysmem.d \
+./Src/tim.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -36,7 +39,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/delay.cyclo ./Src/delay.d ./Src/delay.o ./Src/delay.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/gpio_exti.cyclo ./Src/gpio_exti.d ./Src/gpio_exti.o ./Src/gpio_exti.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+	-$(RM) ./Src/delay.cyclo ./Src/delay.d ./Src/delay.o ./Src/delay.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/gpio_exti.cyclo ./Src/gpio_exti.d ./Src/gpio_exti.o ./Src/gpio_exti.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/tim.cyclo ./Src/tim.d ./Src/tim.o ./Src/tim.su
 
 .PHONY: clean-Src
 

@@ -3,6 +3,7 @@
 #include "gpio.h"
 #include "delay.h"
 #include "gpio_exti.h"
+#include "tim.h"
 #include <stdio.h>
 
 /* Defines */
@@ -40,6 +41,9 @@ int main(void) {
 	/* Init gpio ports */
 	init_port_b();
 	init_port_a();
+
+	/* Init timer */
+	tim2_1hz_init();
 	
 	/* Main Program Loop */
 	while(1) {
@@ -147,19 +151,19 @@ void task_rgb_fsm(void) {
 		switch (next_state) {
 			case ST_RED:
 				control_rgb_led(1, 0, 0);
-				delay(g_rgb_delay);
+				tim2_delay(g_rgb_delay);
 				next_state = ST_GREEN;
 				break;
 
 			case ST_GREEN:
 				control_rgb_led(0, 1, 0);
-				delay(g_rgb_delay);
+				tim2_delay(g_rgb_delay);
 				next_state = ST_BLUE;
 				break;
 
 			case ST_BLUE:
 				control_rgb_led(0, 0, 1);
-				delay(g_rgb_delay);
+				tim2_delay(g_rgb_delay);
 				next_state = ST_RED;
 				break;
 
@@ -180,13 +184,13 @@ void task_flash_fsm(void) {
 		switch (next_state) {
 			case ST_WHITE:
 				control_rgb_led(1, 1, 1);
-				delay(g_w_delay);
+				tim2_delay(g_w_delay);
 				next_state = ST_BLACK;
 				break;
 			
 			case ST_BLACK:
 				control_rgb_led(0, 0, 0);
-				delay(g_w_delay);
+				tim2_delay(g_w_delay);
 				next_state = ST_WHITE;
 				break;
 
