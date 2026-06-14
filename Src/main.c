@@ -32,20 +32,20 @@ void task_read_buttons(void);
 void task_flash(void);
 void task_rgb(void);
 
+void task_rgb_fsm(void);
+void task_flash_fsm(void);
+
 /* Main Program Entry */
 int main(void) {
 	/* Init gpio ports */
 	init_port_b();
 	init_port_a();
-
-	/* Init interrupts */
-	button_one_exti_init(); 
-	button_two_exti_init();
 	
 	/* Main Program Loop */
 	while(1) {
-		task_flash();
-		task_rgb();
+		task_read_buttons();
+		task_rgb_fsm();
+		task_flash_fsm();
 	}
 }
 
@@ -109,10 +109,15 @@ void task_flash(void) {
 
 void task_rgb(void) {				// only run task when NOT flash mode
 	if (g_flash_led == 0) {
+		// red state
 		control_rgb_led(1, 0, 0);
 		delay(g_rgb_delay);
+
+		// green state
 		control_rgb_led(0, 1, 0);
 		delay(g_rgb_delay);
+
+		// blue state
 		control_rgb_led(0, 0, 1);
 		delay(g_rgb_delay);
 	}
@@ -127,5 +132,67 @@ void EXTI4_15_IRQHandler(void) {
 	if ((EXTI->FPR1 & EXTI_FPR1_FPIF7) != 0) {
 		EXTI->FPR1 |= EXTI_FPR1_FPIF7;
 		control_rgb_led(0,1,1);
+	}
+}
+
+void task_rgb_fsm(void) {
+	static enum {
+		ST_RED,
+		ST_GREEN,
+		ST_BLUE,
+		ST_OFF
+	} next_state;
+
+	if (g_flash_led == 0) {
+		switch (next_state) {
+			case ST_RED:
+				control_rgb_led(1, 0, 0);
+				delay(g_rgb_delay);
+				next_state = ST_GREEN;
+				break;
+
+			case ST_GREEN:
+				control_rgb_led(0, 1, 0);
+				delay(g_rgb_delay);
+				next_state = ST_BLUE;
+				break;
+
+			case ST_BLUE:
+				control_rgb_led(0, 0, 1);
+				delay(g_rgb_delay);
+				next_state = ST_RED;
+				break;
+
+			default:
+				next_state = ST_RED;
+				break;
+		}
+	}
+}
+
+void task_flash_fsm(void) {
+	static enum {
+		ST_WHITE,
+		ST_BLACK
+	} next_state = ST_WHITE;
+
+	if (g_flash_led == 1) {
+		switch (next_state) {
+			case ST_WHITE:
+				control_rgb_led(1, 1, 1);
+				delay(g_w_delay);
+				next_state = ST_BLACK;
+				break;
+			
+			case ST_BLACK:
+				control_rgb_led(0, 0, 0);
+				delay(g_w_delay);
+				next_state = ST_WHITE;
+				break;
+
+			default:
+				next_state = ST_WHITE;
+				break;
+		}
 	}
 }
